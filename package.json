@@ -10,16 +10,28 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^5.5.2",
+    "@hookform/resolvers": "^3.9.0",
+    "@prisma/client": "^5.19.1",
+    "@radix-ui/react-label": "^2.1.0",
     "@radix-ui/react-slot": "^1.1.0",
+    "@types/bcrypt": "^5.0.2",
+    "@types/pg": "^8.11.9",
+    "autoprefixer": "^10.4.20",
+    "bcrypt": "^5.1.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dotenv": "^16.4.5",
+    "libpq": "^1.8.13",
     "lucide-react": "^0.439.0",
     "next": "14.2.10",
+    "pg": "^8.12.0",
     "react": "^18",
     "react-dom": "^18",
+    "react-hook-form": "^7.53.0",
     "shadcn-ui": "^0.9.0",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
@@ -27,8 +39,9 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.2.10",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.45",
+    "prisma": "^5.19.1",
+    "tailwindcss": "^3.4.11",
     "typescript": "^5"
   }
 }
