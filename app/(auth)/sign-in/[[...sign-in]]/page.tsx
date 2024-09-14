@@ -1,5 +1,5 @@
+// app/sign-in/page.tsx
 "use client";
-
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,10 +28,6 @@ export default function SignIn() {
     resolver: zodResolver(signInSchema)
   });
 
-  const handleSignUpClick = () => {
-    router.push("/sign-up");
-  };
-
   const onSubmit: SubmitHandler<SignInFormValues> = async (data) => {
     try {
       const res = await fetch("/api/sign-in", {
@@ -43,17 +39,24 @@ export default function SignIn() {
       });
 
       if (res.ok) {
+        const { token } = await res.json();
+        document.cookie = `authToken=${token}; path=/`; // Set auth token in cookies
         router.push("/dashboard");
       } else {
-        const { message } = await res.json();
-        setError(message);
+        const { error } = await res.json();
+        setError(error);
       }
     } catch (error) {
       setError("Something went wrong. Please try again.");
     }
   };
+  const handleSignUpClick = () => {
+    router.push("/sign-up");
+  };
 
   return (
+    
+ 
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white shadow-md rounded-lg">
         <h2 className="text-2xl font-bold text-center mb-6">Sign In</h2>
@@ -108,18 +111,13 @@ export default function SignIn() {
             )}
           </div>
 
-          <Button type="submit" className="w-full py-2 bg-blue-600 text-white rounded-md">
+          <Button type="submit"  variant={"long"}>
             Sign In
           </Button>
-          <p className="text-center mt-4">Dont have an account?&nbsp;
-            <button
-              type="button"
-              className="text-blue-600 hover:underline"
-              onClick={handleSignUpClick}
-            >
-              Sign Up
-            </button>
-          </p>
+          <p>Don’t have an account?</p>
+          <Button onClick={handleSignUpClick} variant={"long"}>
+            Sign Up
+          </Button>
         </form>
       </div>
     </div>

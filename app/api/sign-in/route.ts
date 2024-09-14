@@ -1,3 +1,4 @@
+// app/api/sign-in/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcrypt';
@@ -25,7 +26,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Return a success response (e.g., a token or user info)
-    return NextResponse.json({ message: 'Sign-in successful' });
+    const token = 'your-generated-token'; // Generate a real token
+    return NextResponse.json({ token });
   } catch (error) {
     console.error('Sign-in error:', error);
     return NextResponse.json({ error: 'Sign-in failed' }, { status: 500 });

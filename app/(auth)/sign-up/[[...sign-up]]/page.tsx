@@ -98,8 +98,8 @@ export default function SignUp() {
           </button>
           <p className="mt-4">Already have an account?</p>
           <button
-            type="button"
-            className="w-full py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors"
+           type="button"
+              className="text-blue-600 hover:underline"
             onClick={handleSignInClick}
           >
             Sign In
