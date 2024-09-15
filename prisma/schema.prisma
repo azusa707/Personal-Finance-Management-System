@@ -14,3 +14,9 @@ model User {
   password  String
   createdAt DateTime @default(now())
 }
+model Transaction {
+  id        Int      @id @default(autoincrement())
+  amount    Float
+  category  String
+  createdAt DateTime @default(now())
+}
