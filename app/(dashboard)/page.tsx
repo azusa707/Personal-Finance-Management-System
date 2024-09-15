@@ -1,12 +1,16 @@
 // dashboard/page.tsx
-import { TransactionsDashboard } from "./transactions/page"; // Assuming the code is in TransactionsDashboard.tsx
+"use client";
+import { Button } from "@/components/ui/button";
+import { useNewAccount } from "@/features/accounts/hooks/use-new-accounts";
 
-const DashboardPage = () => {
+export default function Home() {
+  const { onOpen } = useNewAccount();
+
   return (
     <div>
-      <TransactionsDashboard />
+      <Button onClick={onOpen}>
+        Add an account
+      </Button>
     </div>
   );
 };
-
-export default DashboardPage;
