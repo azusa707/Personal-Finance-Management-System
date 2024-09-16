@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import QueryProviders from "@/providers/query-providers";
+import { QueryProvider } from "@/providers/query-providers";
 import { SheetProvider } from "@/providers/sheet-provider";
 import { Toaster } from "@/components/ui/sonner";
 // Define the local fonts
@@ -33,11 +33,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <QueryProviders>
+        <QueryProvider>
           <SheetProvider />
           <Toaster />
           {children}
-        </QueryProviders>
+        </QueryProvider>
       </body>
     </html>
   );

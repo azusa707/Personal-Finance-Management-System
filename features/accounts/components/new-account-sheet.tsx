@@ -9,7 +9,7 @@ import {
     SheetHeader,
     SheetTitle,
 } from "@/components/ui/sheet";
-import { useCreateAccount } from "../api/use-create-accounts";
+import { useCreateAccount } from "@/features/accounts/api/use-create-accounts";
 
 const formSchema = insertAccountSchema.pick({
     name: true,
@@ -23,7 +23,11 @@ export const NewAccountSheet = () => {
     const mutation = useCreateAccount();
 
     const onSubmit = (values: FormValues) => {
-        mutation.mutate(values);
+        mutation.mutate({ json: values }, {
+            onSuccess: () => {
+                onClose();
+            },
+        });
     };
     return (
         <Sheet open={isOpen} onOpenChange={onClose}>
@@ -36,9 +40,11 @@ export const NewAccountSheet = () => {
                         Create a new account for your personal finance management.
                     </SheetDescription>
                 </SheetHeader>
-                <AccountForm onSubmit={onSubmit} disabled={false} defaultValues={{
-                    name: "",
-                }} />
+                <AccountForm onSubmit={onSubmit}
+                    disabled={mutation.isPending}
+                    defaultValues={{
+                        name: "",
+                    }} />
             </SheetContent>
         </Sheet>
     );

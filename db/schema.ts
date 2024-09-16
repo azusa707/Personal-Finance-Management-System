@@ -1,6 +1,7 @@
 import { pgTable, text } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 
+
 // Define the accounts table
 export const accounts = pgTable("accounts", {
     id: text("id").primaryKey(),
