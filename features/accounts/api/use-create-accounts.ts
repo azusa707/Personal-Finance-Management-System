@@ -21,14 +21,14 @@ export const useCreateAccount = () => {
         }, 
         onSuccess: () => {
             toast.success("Account created",{
-                 className: 'text-black'
+              className :"toast bg-muted text-muted-foreground"
             });
             queryClient.invalidateQueries({ queryKey: ["accounts"] });
 
         },
         onError: () => {
             toast.error("Failed to create account", {
-                 className: 'text-black'
+                 className :"toast bg-muted text-muted-foreground"
             });
         },
     });
