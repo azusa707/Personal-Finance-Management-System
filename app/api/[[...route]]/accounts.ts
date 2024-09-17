@@ -1,8 +1,10 @@
 import { Hono } from "hono";
-import { db } from "@/db/drizzle";
 import { accounts,insertAccountSchema } from "@/db/schema";
 import { zValidator } from "@hono/zod-validator";
 import { createId } from "@paralleldrive/cuid2";
+import { z } from "zod";
+import { db } from "@/db/drizzle";
+import { and, eq, inArray} from "drizzle-orm";
 
 
 const app =new Hono()
@@ -36,7 +38,37 @@ const app =new Hono()
 
         return c.json({ data });
     }
+)
+.post(
+    "/bulk-delete",
+    zValidator(
+        "json",
+        z.object({
+            ids: z.array(z.string()),
+        })
+    ),
+
+async (c) => {
+    
+    const values = c.req.valid("json");
+
+    
+    const data = await db
+    .delete(accounts)
+    .where(
+        and(
+            eq(accounts.userId, "default-user-id"),
+            inArray(accounts.id, values.ids)
+        )
+    )
+    .returning({
+        id: accounts.id,
+    });
+
+    return c.json({ data });
+}
 );
+
 
 
 export default app;
